@@ -1,0 +1,5 @@
+data_all  <- read.csv(file.choose(),sep = ",",header = TRUE)
+modZero <- lm(formula = new_deaths ~ 1, data = data_all) 
+M_selected_data2_factor <- lm(new_deaths ~ ., data=data_all)
+modbest<- MASS::stepAIC(modZero, direction = "forward", scope = list(lower = modZero, upper = M_selected_data2_factor),k = 2)
+summary(modbest)
